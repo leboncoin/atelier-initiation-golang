@@ -7,3 +7,7 @@ Nous ferons un survol des spécificités du langage, en insistant particulièrem
 Ce repository contient les instructions pour les exercices. Le plus simple est de suivre ces instructions en ligne, mais vous pouvez aussi cloner le repository.
 
 La première étape à suivre est l'[installation du compilateur Go](0_installation).
+
+# Slides
+
+Vous pourrez retrouver les slides utilisés pendant l'atelier [ici](https://docs.google.com/presentation/d/1stST9AzzvQzZF2F2xrDz-GEIEEwWlqSrgBBLCvLOgks/edit?usp=sharing).
