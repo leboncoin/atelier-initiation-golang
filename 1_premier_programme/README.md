@@ -2,7 +2,7 @@
 
 Selon les conventions Go, les projets se placent dans `$GOPATH/src/nomduprojet`.
 
-Dans votre répertoire, créez un fichier `helloworld.go` avec le contenu suivant :
+Dans un répertoire `$GOPATH/src/hello`, créez un fichier `helloworld.go` avec le contenu suivant :
 
 ```
 package main
@@ -17,10 +17,14 @@ func main() {
 
 ```
 $ cd $GOPATH/src/hello
-$ touch helloworld.go
+$ go build
+$ ./hello
+hello, world
 ```
 
 ## Quelques explications
+
+`go build` compile le package du répertoire courant. Le binaire résultant prend le nom du répertoire (et non le nom du fichier `.go`). Il y a un seul binaire par package et non un binaire par fichier source.
 
 `main` est un nom de package spécial. Il indique à Go que le binaire doit être exécutable (pas une simple librairie).
 
