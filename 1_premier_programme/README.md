@@ -57,7 +57,7 @@ Le package `fmt` fournit des fonctions d'intéraction avec la console. C'est un 
 `fmt.Printf` est une fonction très utilisée qui permet d'afficher des données, en utilisant le système de formattage classique du C. Ne pas oublier le `\n` à la fin.
 
 En Go, il est plus fréquent qu'en Java d'utiliser le formattage pour afficher des données, en partie parce qu'il n'y a pas de méthode par défaut comme `.toString()`.
-Il existe d'ailleurs de nombreuses fonctions qui possèdent une variante de même nom, préfixé par un `f` : `fmt.Scan`/`fmt.Scanf`, `fmt.Fprint`/`fmt.Fprintf`, `assert.Error`/`assert.Errorf` (dans le package `testify/assert`), etc.
+Il existe d'ailleurs de nombreuses fonctions qui possèdent une variante de même nom, suffixé par un `f` : `fmt.Scan`/`fmt.Scanf`, `fmt.Fprint`/`fmt.Fprintf`, `assert.Error`/`assert.Errorf` (package `testify/assert`), etc.
 
 Alors qu'en Java, on va souvent faire des choses comme cela :
 ```
@@ -84,7 +84,7 @@ import (
 )
 
 func Test_1_plus_1_should_be_2(t *testing.T) {
-	result := 1 + 2 // this will not work
+	result := 1 + 2 // code under test; will fail at first
 	if result != 2 {
 		t.Errorf("expected '%v', got '%v'", 2, result)
 	}
@@ -102,14 +102,16 @@ exit status 1
 FAIL	hello	0.001s
 ```
 
-Corrigez le test. Vous devriez le voir passer :
+Corrigez le code sous test. Vous devriez le voir passer :
 ```
 $ go test
 PASS
 ok  	hello	0.001s
 ```
 
-Modifiez maintenant le test pour qu'il vérifie qu'une fonction `sayHello` dans le même package prenne un prénom en paramètre et retourne un texte commençant par `Hello, ` et se terminant par le prénom.
+Modifiez maintenant le test pour qu'il vérifie qu'une fonction `sayHello` dans le même package qui prend un prénom en paramètre. Cette fonction retourne un texte commençant par `Hello, ` et se terminant par le prénom.
+
+Dans un premier temps, écrivez uniquement le test, sans le code correspondant.
 
 Executer `go test` échouera à la compilation, puisque la fonction n'existe pas.
 
@@ -148,3 +150,9 @@ La convention en Go est de placer les tests unitaires dans le même package et d
 Il existe donc des packages open-source pour écrire des assertions, mocks, etc. Le plus populaire semble être [testify](https://github.com/stretchr/testify) que nous utilisons beaucoup chez leboncoin.
 
 N'hésitez pas à réécrire le test en utilisant `testify/assert`. Dans ce cas, pensez à récupérer au préalable le package avec la commande `go get github.com/stretchr/testify`.
+
+Le test ressemblera alors à ceci :
+
+```
+	assert.Equal(t, "Hello, Jane", sayHello("Jane"))
+```
