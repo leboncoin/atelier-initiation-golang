@@ -10,4 +10,4 @@ La première étape à suivre est l'[installation du compilateur Go](0_installat
 
 # Slides
 
-Vous pourrez retrouver les slides utilisés pendant l'atelier [ici](https://docs.google.com/presentation/d/1stST9AzzvQzZF2F2xrDz-GEIEEwWlqSrgBBLCvLOgks/edit?usp=sharing).
+Vous pourrez retrouver les slides présentés pendant l'atelier [ici](https://docs.google.com/presentation/d/1stST9AzzvQzZF2F2xrDz-GEIEEwWlqSrgBBLCvLOgks/edit?usp=sharing).

@@ -24,9 +24,9 @@ hello, world
 
 ## Quelques explications
 
-`go build` compile le package du répertoire courant. Le binaire résultant prend le nom du répertoire (et non le nom du fichier `.go`). Il y a un seul binaire par package et non un binaire par fichier source.
+`go build` compile le package du répertoire courant. Le binaire résultant prend le nom du répertoire (et non le nom du fichier `.go`, ni le nom du package). Il y a un seul binaire par package et non un binaire par fichier source.
 
-`main` est un nom de package spécial. Il indique à Go que le binaire doit être exécutable (pas une simple librairie).
+`main` est un nom de package spécial. Il indique à Go que le binaire doit être exécutable (pas une simple librairie). On ne peut pas avoir de package sans nom.
 
 Le package `fmt` fournit des fonctions d'intéraction avec la console. C'est un peu l'équivalent de `java.lang.System`, mais il faut l'importer explicitement.
 
@@ -42,3 +42,5 @@ En go, vous verrez souvent ceci :
 ```
 fmt.Println("user: %v\n", user)
 ```
+
+`%v` utilise un format par défaut. Voir [la doc du package fmt](https://golang.org/pkg/fmt/) pour les détails.
