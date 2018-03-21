@@ -57,6 +57,7 @@ Le package `fmt` fournit des fonctions d'intéraction avec la console. C'est un 
 `fmt.Printf` est une fonction très utilisée qui permet d'afficher des données, en utilisant le système de formattage classique du C. Ne pas oublier le `\n` à la fin.
 
 En Go, il est plus fréquent qu'en Java d'utiliser le formattage pour afficher des données, en partie parce qu'il n'y a pas de méthode par défaut comme `.toString()`.
+Il existe d'ailleurs de nombreuses fonctions qui possèdent une variante de même nom, préfixé par un `f` : `fmt.Scan`/`fmt.Scanf`, `fmt.Fprint`/`fmt.Fprintf`, `assert.Error`/`assert.Errorf` (dans le package `testify/assert`), etc.
 
 Alors qu'en Java, on va souvent faire des choses comme cela :
 ```
