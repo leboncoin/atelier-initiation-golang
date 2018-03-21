@@ -24,21 +24,28 @@ $ ./hello
 
 `go build` compile le package du répertoire courant. Le binaire résultant prend le nom du répertoire (et non le nom du fichier `.go`, ni le nom du package). Il y a un seul binaire par package et non un binaire par fichier source.
 
-`main` est un nom de package spécial. Il indique à Go que le binaire doit être exécutable (pas une simple librairie). On ne peut pas avoir de package sans nom.
+`main` est un nom de package spécial. Il indique à Go que le binaire doit être exécutable (et pas une librairie qui serait importée dans un autre package). On ne peut pas avoir de package sans nom.
 
-## Affichage d'Hello, World
+## Affichage d'`Hello, World`
 
 Vous allez avoir besoin d'importer le package `fmt`.
 
 `fmt` contient plusieurs fonctions utiles pour formatter des données et les afficher en ligne de commande.
 
-La fonction la plus simple à utiliser est `fmt.Println()`. Nous allons plutôt utiliser `fmt.Printf()` qui est plus puissante.
+La fonction la plus simple à utiliser est `fmt.Println`. Utilisez plutôt `fmt.Printf` qui est plus puissante.
+
+Après implémentation, vous devriez obtenir ce qui suit :
+```
+$ go build
+$ ./hello
+Hello, World
+```
 
 ### Quelques explications
 
 Le package `fmt` fournit des fonctions d'intéraction avec la console. C'est un peu l'équivalent de `java.lang.System`, mais il faut l'importer explicitement. Tous les packages utilisés dans un fichier doivent être explicitement importés.
 
-`fmt.Printf` est une fonction très utilisée qui permet d'afficher quelque chose, avec le système de formattage classique du C. Ne pas oubliez le `\n` à la fin.
+`fmt.Printf` est une fonction très utilisée qui permet d'afficher des données, en utilisant le système de formattage classique du C. Ne pas oublier le `\n` à la fin.
 
 En Go, il est plus fréquent qu'en Java d'utiliser le formattage pour afficher des données, en partie parce qu'il n'y a pas de méthode par défaut comme `.toString()`.
 
@@ -53,9 +60,9 @@ fmt.Printf("user: %v\n", user)
 
 `%v` utilise un format par défaut. Voir [la doc du package fmt](https://golang.org/pkg/fmt/) pour les détails.
 
-## Ecriture de tests
+## Les tests
 
-Nous allons modifier le code pour saluer une personne ("Hello, Jane"), dont le prénom sera passé en paramètre. Commençons par écrire un test.
+Nous allons modifier le code pour saluer une personne (affichage de "Hello, Jane"), dont le prénom sera passé en paramètre. Commençons par écrire un test.
 
 Dans le même répertoire, créez un fichier `helloworld_test.go` avec le contenu suivant :
 
@@ -69,7 +76,7 @@ import (
 func Test_1_plus_1_should_be_2(t *testing.T) {
 	result := 1 + 2 // this will not work
 	if result != 2 {
-		t.Errorf("expected %v, got %v", 2, result)
+		t.Errorf("expected '%v', got '%v'", 2, result)
 	}
 }
 ```
@@ -77,22 +84,44 @@ func Test_1_plus_1_should_be_2(t *testing.T) {
 Pour lancer les tests :
 
 ```
-$ cd $GOPATH/src/hello
 $ go test
 --- FAIL: Test_1_plus_1_should_be_2 (0.00s)
-	helloworld_test.go:10: expected 2, got 3
+	helloworld_test.go:10: expected '2', got '3'
 FAIL
 exit status 1
 FAIL	hello	0.001s
 ```
 
-Modifiez le test pour qu'il vérifie qu'une fonction dans le même package prenne un prénom en paramètre et retourne un texte commençant par `Hello, ` et se terminant par le prénom.
+Corrigez le test. Vous devriez le voir passer :
+```
+$ go test
+PASS
+ok  	hello	0.001s
+```
 
-Executer `go test` échouera à la compilation, puisque la fonction n'existe pas. Créez cette fonction (retournant tout d'abord une chaîne vide), puis relancez le test.
+Modifiez maintenant le test pour qu'il vérifie qu'une fonction `sayHello` dans le même package prenne un prénom en paramètre et retourne un texte commençant par `Hello, ` et se terminant par le prénom.
 
-Enfin, implémentez le corps de la fonction.
+Executer `go test` échouera à la compilation, puisque la fonction n'existe pas.
 
-Vous devriez obtenir un message de succès de la part de `go test` :
+```
+$ go test
+# hello
+./helloworld_test.go:8:12: undefined: sayHello
+FAIL	hello [build failed]
+```
+
+Créez cette fonction (retournant tout d'abord une chaîne vide), puis relancez le test.
+
+```
+$ go test
+--- FAIL: Test_sayHello_returns_the_specified_name_prefixed_with_greetings (0.00s)
+	helloworld_test.go:17: expected 'Hello, Jane', got ''
+FAIL
+exit status 1
+FAIL	hello	0.001s
+```
+
+Enfin, implémentez le corps de la fonction. Vous devriez obtenir un message de succès de la part de `go test` :
 
 ```
 $ go test
@@ -106,6 +135,6 @@ La convention en Go est de placer les tests unitaires dans le même package et d
 
 `go test` est fourni avec l'installation standard de Go, ce qui en fait le standard pour lancer les tests. Néanmoins, il y a peu de support pour industrialiser les tests et les rendre plus lisibles.
 
-Il existe donc des packages open-source pour écrire des assertions, mocks, etc. Le plus populaire semble être (testify)[https://github.com/stretchr/testify] que nous utilisons beaucoup au boncoin.
+Il existe donc des packages open-source pour écrire des assertions, mocks, etc. Le plus populaire semble être (testify)[https://github.com/stretchr/testify] que nous utilisons beaucoup chez leboncoin.
 
 N'hésitez pas à réécrire le test en utilisant `testify/assert`. Dans ce cas, pensez à récupérer au préalable le package avec la commande `go get github.com/stretchr/testify`.
