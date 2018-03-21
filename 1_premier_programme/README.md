@@ -1,5 +1,7 @@
 # Premier programme Go
 
+## Préparation
+
 Selon les conventions Go, les projets se placent dans `$GOPATH/src/nomduprojet`.
 
 Dans un répertoire `$GOPATH/src/hello`, créez un fichier `helloworld.go` avec le contenu suivant :
@@ -7,10 +9,7 @@ Dans un répertoire `$GOPATH/src/hello`, créez un fichier `helloworld.go` avec 
 ```
 package main
 
-import "fmt"
-
 func main() {
-    fmt.Printf("hello, world\n")
 }
 ```
 
@@ -19,28 +18,94 @@ func main() {
 $ cd $GOPATH/src/hello
 $ go build
 $ ./hello
-hello, world
 ```
 
-## Quelques explications
+### Quelques explications
 
 `go build` compile le package du répertoire courant. Le binaire résultant prend le nom du répertoire (et non le nom du fichier `.go`, ni le nom du package). Il y a un seul binaire par package et non un binaire par fichier source.
 
 `main` est un nom de package spécial. Il indique à Go que le binaire doit être exécutable (pas une simple librairie). On ne peut pas avoir de package sans nom.
 
-Le package `fmt` fournit des fonctions d'intéraction avec la console. C'est un peu l'équivalent de `java.lang.System`, mais il faut l'importer explicitement.
+## Affichage d'Hello, World
 
-`fmt.Printf` est une fonction très utilisée qui permet d'afficher quelque chose, avec le système de formattage classique du C. Noter le `\n` à la fin.
+Vous allez avoir besoin d'importer le package `fmt`.
 
-En Go, il est plus fréquent qu'en Java d'utiliser le formattage pour l'affichage, en partie parce qu'il n'y a pas de méthode par défaut `.toString()`.
+`fmt` contient plusieurs fonctions utiles pour formatter des données et les afficher en ligne de commande.
+
+La fonction la plus simple à utiliser est `fmt.Println()`. Nous allons plutôt utiliser `fmt.Printf()` qui est plus puissante.
+
+### Quelques explications
+
+Le package `fmt` fournit des fonctions d'intéraction avec la console. C'est un peu l'équivalent de `java.lang.System`, mais il faut l'importer explicitement. Tous les packages utilisés dans un fichier doivent être explicitement importés.
+
+`fmt.Printf` est une fonction très utilisée qui permet d'afficher quelque chose, avec le système de formattage classique du C. Ne pas oubliez le `\n` à la fin.
+
+En Go, il est plus fréquent qu'en Java d'utiliser le formattage pour afficher des données, en partie parce qu'il n'y a pas de méthode par défaut comme `.toString()`.
 
 Alors qu'en Java, on va souvent faire des choses comme cela :
 ```
 System.out.println("user: " + user);
 ```
-En go, vous verrez souvent ceci :
+En go, la convention, très répandue, est d'utiliser ceci :
 ```
-fmt.Println("user: %v\n", user)
+fmt.Printf("user: %v\n", user)
 ```
 
 `%v` utilise un format par défaut. Voir [la doc du package fmt](https://golang.org/pkg/fmt/) pour les détails.
+
+## Ecriture de tests
+
+Nous allons modifier le code pour saluer une personne ("Hello, Jane"), dont le prénom sera passé en paramètre. Commençons par écrire un test.
+
+Dans le même répertoire, créez un fichier `helloworld_test.go` avec le contenu suivant :
+
+```
+package main
+
+import (
+	"testing"
+)
+
+func Test_1_plus_1_should_be_2(t *testing.T) {
+	result := 1 + 2 // this will not work
+	if result != 2 {
+		t.Errorf("expected %v, got %v", 2, result)
+	}
+}
+```
+
+Pour lancer les tests :
+
+```
+$ cd $GOPATH/src/hello
+$ go test
+--- FAIL: Test_1_plus_1_should_be_2 (0.00s)
+	helloworld_test.go:10: expected 2, got 3
+FAIL
+exit status 1
+FAIL	hello	0.001s
+```
+
+Modifiez le test pour qu'il vérifie qu'une fonction dans le même package prenne un prénom en paramètre et retourne un texte commençant par `Hello, ` et se terminant par le prénom.
+
+Executer `go test` échouera à la compilation, puisque la fonction n'existe pas. Créez cette fonction (retournant tout d'abord une chaîne vide), puis relancez le test.
+
+Enfin, implémentez le corps de la fonction.
+
+Vous devriez obtenir un message de succès de la part de `go test` :
+
+```
+$ go test
+PASS
+ok  	hello	0.001s
+```
+
+### Quelques explications
+
+La convention en Go est de placer les tests unitaires dans le même package et dans le même répertoire que le code sous test.
+
+`go test` est fourni avec l'installation standard de Go, ce qui en fait le standard pour lancer les tests. Néanmoins, il y a peu de support pour industrialiser les tests et les rendre plus lisibles.
+
+Il existe donc des packages open-source pour écrire des assertions, mocks, etc. Le plus populaire semble être (testify)[https://github.com/stretchr/testify] que nous utilisons beaucoup au boncoin.
+
+N'hésitez pas à réécrire le test en utilisant `testify/assert`. Dans ce cas, pensez à récupérer au préalable le package avec la commande `go get github.com/stretchr/testify`.
