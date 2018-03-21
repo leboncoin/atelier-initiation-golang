@@ -109,7 +109,7 @@ PASS
 ok  	hello	0.001s
 ```
 
-Modifiez maintenant le test pour qu'il vérifie qu'une fonction `sayHello` dans le même package qui prend un prénom en paramètre. Cette fonction retourne un texte commençant par `Hello, ` et se terminant par le prénom.
+Modifiez maintenant le test pour qu'il vérifie qu'une fonction `greet` dans le même package qui prend un prénom en paramètre. Cette fonction retourne un texte commençant par `Hello, ` et se terminant par le prénom.
 
 Dans un premier temps, écrivez uniquement le test, sans le code correspondant.
 
@@ -118,7 +118,7 @@ Executer `go test` échouera à la compilation, puisque la fonction n'existe pas
 ```
 $ go test
 # hello
-./helloworld_test.go:8:12: undefined: sayHello
+./helloworld_test.go:8:12: undefined: greet
 FAIL	hello [build failed]
 ```
 
@@ -126,8 +126,8 @@ Créez cette fonction (retournant tout d'abord une chaîne vide), puis relancez 
 
 ```
 $ go test
---- FAIL: Test_sayHello_returns_the_specified_name_prefixed_with_greetings (0.00s)
-	helloworld_test.go:17: expected 'Hello, Jane', got ''
+--- FAIL: Test_greet_should_return_the_name_prefixed_with_a_greeting (0.00s)
+	helloworld_test.go:10: expected 'Hello, Jane', got ''
 FAIL
 exit status 1
 FAIL	hello	0.001s
@@ -145,6 +145,8 @@ ok  	hello	0.001s
 
 La convention en Go est de placer les tests unitaires dans le même package et dans le même répertoire que le code sous test.
 
+Les fichiers contenant les tests *doivent* avoir un nom qui termine par `_test.go`. Les fonctions qui s'y trouvent *doivent* avoir un nom qui commence par `Test`.
+
 `go test` est fourni avec l'installation standard de Go, ce qui en fait le standard pour lancer les tests. Néanmoins, il y a peu de support pour industrialiser les tests et les rendre plus lisibles.
 
 Il existe donc des packages open-source pour écrire des assertions, mocks, etc. Le plus populaire semble être [testify](https://github.com/stretchr/testify) que nous utilisons beaucoup chez leboncoin.
@@ -154,5 +156,5 @@ N'hésitez pas à réécrire le test en utilisant `testify/assert`. Dans ce cas,
 Le test ressemblera alors à ceci :
 
 ```
-	assert.Equal(t, "Hello, Jane", sayHello("Jane"))
+	assert.Equal(t, "Hello, Jane", greet("Jane"))
 ```
