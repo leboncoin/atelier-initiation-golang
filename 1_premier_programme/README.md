@@ -13,12 +13,15 @@ func main() {
 }
 ```
 
+Pour l'exécuter :
 
 ```
 $ cd $GOPATH/src/hello
 $ go build
 $ ./hello
 ```
+
+Le programme ne retourne rien pour le moment.
 
 ### Quelques explications
 
@@ -29,6 +32,12 @@ $ ./hello
 ## Affichage d'`Hello, World`
 
 Vous allez avoir besoin d'importer le package `fmt`.
+
+```
+import (
+	"fmt"
+)
+```
 
 `fmt` contient plusieurs fonctions utiles pour formatter des données et les afficher en ligne de commande.
 
@@ -135,6 +144,6 @@ La convention en Go est de placer les tests unitaires dans le même package et d
 
 `go test` est fourni avec l'installation standard de Go, ce qui en fait le standard pour lancer les tests. Néanmoins, il y a peu de support pour industrialiser les tests et les rendre plus lisibles.
 
-Il existe donc des packages open-source pour écrire des assertions, mocks, etc. Le plus populaire semble être (testify)[https://github.com/stretchr/testify] que nous utilisons beaucoup chez leboncoin.
+Il existe donc des packages open-source pour écrire des assertions, mocks, etc. Le plus populaire semble être [testify](https://github.com/stretchr/testify) que nous utilisons beaucoup chez leboncoin.
 
 N'hésitez pas à réécrire le test en utilisant `testify/assert`. Dans ce cas, pensez à récupérer au préalable le package avec la commande `go get github.com/stretchr/testify`.
