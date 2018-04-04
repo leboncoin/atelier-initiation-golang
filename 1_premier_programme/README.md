@@ -25,9 +25,9 @@ Le programme ne retourne rien pour le moment.
 
 ### Quelques explications
 
-`go build` compile le package du répertoire courant. Le binaire résultant prend le nom du répertoire (et non le nom du fichier `.go`, ni le nom du package). Il y a un seul binaire par package et non un binaire par fichier source.
+`go build` compile le package du répertoire courant. Le binaire résultant prend le nom du répertoire (et non pas le nom du fichier `.go`, ni le nom du package). Il y a un seul binaire par package et non un binaire par fichier source.
 
-`main` est un nom de package spécial. Il indique à Go que le binaire doit être exécutable (et pas une librairie qui serait importée dans un autre package). On ne peut pas avoir de package sans nom.
+`main` est un nom de package spécial. Il indique à Go que le binaire doit être exécutable (et non une librairie qui serait plus tard importée dans un autre package). On ne peut pas avoir de package sans nom.
 
 ## Affichage d'`Hello, World`
 
@@ -43,7 +43,7 @@ import (
 
 La fonction la plus simple à utiliser est `fmt.Println`. Utilisez plutôt `fmt.Printf` qui est plus puissante.
 
-Après implémentation, vous devriez obtenir ce qui suit :
+Implémentez l'affichage de `Hello, World`. Vous devriez obtenir ce qui suit :
 ```
 $ go build
 $ ./hello
@@ -52,7 +52,8 @@ Hello, World
 
 ### Quelques explications
 
-Le package `fmt` fournit des fonctions d'intéraction avec la console. C'est un peu l'équivalent de `java.lang.System`, mais il faut l'importer explicitement. Tous les packages utilisés dans un fichier doivent être explicitement importés.
+Le package `fmt` fournit des fonctions d'intéraction avec la console. C'est un peu l'équivalent de `java.lang.System`, mais il faut l'importer explicitement, alors que `java.lang` est importé implicitement en Java.
+En Go, tous les packages utilisés doivent être explicitement importés.
 
 `fmt.Printf` est une fonction très utilisée qui permet d'afficher des données, en utilisant le système de formattage classique du C. Ne pas oublier le `\n` à la fin.
 
@@ -63,7 +64,7 @@ Alors qu'en Java, on va souvent faire des choses comme cela :
 ```
 System.out.println("user: " + user);
 ```
-En go, la convention, très répandue, est d'utiliser ceci :
+En Go, la convention, très répandue, est d'utiliser ceci :
 ```
 fmt.Printf("user: %v\n", user)
 ```
@@ -91,7 +92,7 @@ func Test_1_plus_1_should_be_2(t *testing.T) {
 }
 ```
 
-Pour lancer les tests :
+Lancez les tests :
 
 ```
 $ go test
