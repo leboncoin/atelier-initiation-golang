@@ -13,6 +13,7 @@
 # Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
 .glide/
 
-1_premier_programme/1_simple_hello_world/1_simple_hello_world
-1_premier_programme/2_hello_world_with_test/2_hello_world_with_test
-1_premier_programme/3_hello_world_with_test_and_testify/3_hello_world_with_test_and_testify
+1_premier_programme/solutions/1_simple_hello_world/1_simple_hello_world
+1_premier_programme/solutions/2_hello_world_with_test/2_hello_world_with_test
+1_premier_programme/solutions/3_hello_world_with_test_and_testify/3_hello_world_with_test_and_testify
+4_goroutines_et_channels/views-server/views-server
