@@ -1,49 +1,54 @@
 # Serveur HTTP
 
 
-Dans un répertoire `$GOPATH/src/service`, créez un fichier `service.go`:
+Dans un répertoire `$GOPATH/src/service`, créez un fichier `service.go`.
 
+Pour écrire ce microservice, vous aurez besoin du package `net/http` de la bibliothèque standard du langage (cf. https://golang.org/pkg/net/http/).
 
-Pour ecrire ce microservice vous aurez besoin du package `net/http` de la bibliotheque standard du langage.
+Ce package met a disposition deux fonctions importantes, `HandleFunc` et `ListenAndServe`.
 
-Ce package met a disposition deux fonctions: 
+### HandleFunc
 
-#### HandleFunc(pattern string, handler func(ResponseWriter, *Request))
+```HandleFunc(pattern string, handler func(ResponseWriter, *Request))```
 
-Enregistre le **handler** passé en paramètre sur un pattern donné.
+Cette fonction enregistre le `handler` passé en paramètre sur un pattern de path donné.
 
-La variable **handler** est un pointeur sur fonction ayant la signature suivante: `func(ResponseWriter, *Request)`
+Le `handler` est un pointeur sur une fonction ayant la signature suivante : `func(ResponseWriter, *Request)`.
 
-Le handler est donc une fonction qui prend deux paramètres:
+Dans cette fonction, il y a deux paramètres :
 
-   - Un `ResponseWriter` qui permet de construire une réponse HTTP
-   - Un pointeur sur une `Request` qui représente la requête HTTP reçue
+   - Un `ResponseWriter` qui permet de construire une réponse HTTP ; il contient un fonction pour écrire un tableau de bytes (pour convertir une `string` en tableau de bytes, utilisez `[]byte(myString)`)
+   - Un pointeur sur une `Request` qui représente la requête HTTP reçue, y compris le path de l'appel et le body
 
-#### ListenAndServe(addr string, handler Handler)
+#### ListenAndServe
 
-Démarre un serveur HTTP qui écoute sur une interface et un port passés en paramètre
+```ListenAndServe(addr string, handler Handler)```
 
-### Partie 1
+Cette fonction démarre un serveur HTTP qui écoute sur une interface et un port passés en paramètre. Le paramètre `addr` sera de la forme `:8080`.
 
-Le microservice devra commencer par exposer une première route `/ping` sur laquelle il renverra simplement **pong**
+Attention : cette fonction ne rend pas la main ; l'exécution est donc bloquée au niveau de cet appel.
+
+### Pong
+
+Le microservice devra commencer par exposer une première route `/ping` sur laquelle il renverra simplement le texte `pong`.
 
 ```
 $ curl localhost:8080/ping
 pong
 ```
 
-### Partie 2
+### Appel avec paramètre de path
 
-Le microservice exposera ensuite une route `/hello/<nom>` sur laquelle il renverra **Hello, \<nom>!**
+Le microservice exposera ensuite une route `/hello/<nom>` sur laquelle il renverra `Hello, \<nom>!`.
 
 ```
 $ curl localhost:8080/hello/world
 Hello, world!
 ```
 
-### Partie 3
+### Appel avec body
 
-Le microservice exposera finalement une route `/bye` sur laquelle il renverra **Bye, \<nom>!**
+Le microservice exposera finalement une route `/bye` sur laquelle il renverra `Bye, \<nom>!`.
 
 Le \<nom> viendra du body de la requete HTTP
 
