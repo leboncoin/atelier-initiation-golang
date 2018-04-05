@@ -17,7 +17,7 @@ Le `handler` est un pointeur sur une fonction ayant la signature suivante : `fun
 
 Dans cette fonction, il y a deux paramètres :
 
-   - Un `ResponseWriter` qui permet de construire une réponse HTTP ; il contient un fonction pour écrire un tableau de bytes (pour convertir une `string` en tableau de bytes, utilisez `[]byte(myString)`)
+   - Un `ResponseWriter` qui permet de construire une réponse HTTP ; il contient une fonction pour écrire un tableau de bytes (pour convertir une `string` en tableau de bytes, utilisez `[]byte(myString)`)
    - Un pointeur sur une `Request` qui représente la requête HTTP reçue, y compris le path de l'appel et le body
 
 #### ListenAndServe
@@ -30,12 +30,17 @@ Attention : cette fonction ne rend pas la main ; l'exécution est donc bloquée 
 
 ### Affichage du path
 
-Le microservice devra commencer par exposer une route `/test/` et afficher dans la console le path de la requête appelante. 
+Le microservice devra commencer par exposer une route `/test/` et afficher dans la console le path de la requête appelante.
 
 ```
 $ curl localhost:8080/test/blah
+```
+
+Pas de réponse visible du côté de la console appelante, mais la console du serveur devrait afficher ceci :
+```
 /test/blah
 ```
+
 
 ### Pong
 
