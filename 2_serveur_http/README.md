@@ -28,9 +28,18 @@ Cette fonction démarre un serveur HTTP qui écoute sur une interface et un port
 
 Attention : cette fonction ne rend pas la main ; l'exécution est donc bloquée au niveau de cet appel.
 
+### Affichage du path
+
+Le microservice devra commencer par exposer une route `/test/` et afficher dans la console le path de la requête appelante. 
+
+```
+$ curl localhost:8080/test/blah
+/test/blah
+```
+
 ### Pong
 
-Le microservice devra commencer par exposer une première route `/ping` sur laquelle il renverra simplement le texte `pong`.
+Le microservice exposera une route `/ping` sur laquelle il renverra simplement le texte `pong`.
 
 ```
 $ curl localhost:8080/ping
