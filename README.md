@@ -13,3 +13,7 @@ Ensuite, parcourez chaque chapitre dans l'ordre.
 # Slides
 
 Vous pourrez retrouver les slides présentés pendant l'atelier [ici](https://docs.google.com/presentation/d/1stST9AzzvQzZF2F2xrDz-GEIEEwWlqSrgBBLCvLOgks/edit?usp=sharing).
+
+# Repository Git
+
+La dernière version de ce repository est disponible sur https://github.com/leboncoin/atelier-initiation-golang.
