@@ -16,9 +16,8 @@ Cette fonction enregistre le `handler` passé en paramètre sur un pattern de pa
 Le `handler` est un pointeur sur une fonction ayant la signature suivante : `func(ResponseWriter, *Request)`.
 
 Dans cette fonction, il y a deux paramètres :
-
-   - Un `ResponseWriter` qui permet de construire une réponse HTTP ; il contient une fonction pour écrire un tableau de bytes (pour convertir une `string` en tableau de bytes, utilisez `[]byte(myString)`)
-   - Un pointeur sur une `Request` qui représente la requête HTTP reçue, y compris le path de l'appel et le body
+- Un `ResponseWriter` qui permet de construire une réponse HTTP ; il contient une fonction pour écrire un tableau de bytes (pour convertir une `string` en tableau de bytes, utilisez `[]byte(myString)`)
+- Un pointeur sur une `Request` qui représente la requête HTTP reçue, y compris le path de l'appel et le body
 
 #### ListenAndServe
 
