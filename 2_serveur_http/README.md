@@ -7,7 +7,7 @@ Pour écrire ce microservice, vous aurez besoin du package `net/http` de la bibl
 
 Ce package met a disposition deux fonctions importantes, `HandleFunc` et `ListenAndServe`.
 
-### HandleFunc
+#### HandleFunc
 
 ```HandleFunc(pattern string, handler func(ResponseWriter, *Request))```
 
