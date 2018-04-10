@@ -80,15 +80,38 @@ La lecture ressemble à cela :
 La durée d'exécution du code devrait maintenant être la même que celle de la plus lente des requêtes HTTP, soit environ 2 secondes si vous avez un grand nombre d'annonces.
 Mais surtout, vous avez la garantie d'obtenir toutes les valeurs.
 
-## Gestion d'un timeout
+## Exercice bonus : Gestion d'un timeout
 
-En exercice bonus, nous allons gérer un timeout, au cas où certaines requêtes prendraient trop de temps.
+Nous allons gérer un timeout, au cas où certaines requêtes prendraient trop de temps. Pour cela, nous allons utiliser la clause `select` (qui écoute sur plusieurs channels) et la fonction `time.After`.
 
-Pour cela, nous allons utiliser la clause `select` qui permet d'écouter sur plusieurs channels simulatément.
+Dans la deuxième clause `for` de l'exercice précédent, ajoutez un `select` qui va écouter d'une part sur le channel des nombres de vue et d'autre part sur un `timeoutChan` (et échouer si ce channel fournit une valeur).
 
-Egalement, nous allons tirer parti de la fonction `time.After` qui crée un channel qui recevra une valeur lorsqu'une certaine durée s'est écoulée.
+### Quelques explications
+
+La clause `select` écoute sur plusieurs channels simultanément et rend la main dès qu'un channel fournit une valeur. Nous l'utilisons souvent à l'intérieur d'une boucle `for` infinie qui processe des valeurs jusqu'à ce qu'une erreur arrive, par exemple.
+
 ```
-	timeoutChan := time.After(3 * time.Second)
+for {
+	select {
+	case msg := <-messageChan:
+		log.Infof("message received: %v", msg)
+	case err := <-errorChan:
+		log.Infof("something went wrong :-(: %v", err)
+	}
+}
 ```
 
-Dans la deuxième clause `for` du paragraphe précédent, ajoutez un `select` qui va écouter d'une part sur le channel des nombres de vue et d'autre part sur le `timeoutChan` (et échouer si ce channel fournit une valeur).
+La fonction `time.After` est très pratique pour gérer les timeouts. Elle se combine souvent avec le `select` pour exprimer que l'on veut attendre une réponse, mais pas plus qu'un certain temps.
+
+Nous l'utilisons beaucoup dans nos tests.
+```
+select {
+case m := <-partitionConsumer.Messages():
+	assert.Equal(t, "john", m.Name)
+	break
+case <-time.After(1 * time.Second):
+	assert.Fail(t, "did not get the message after waiting 1 sec")
+}
+```
+
+Nous l'avons utilisé aussi pour gérer des timeouts sur les appels HTTP dans le code de production, mais les `context` en Go semblent un meilleur paradigme poour cela et nous les utilisons de plus en plus souvent.

@@ -50,6 +50,17 @@ $ ./hello
 Hello, World
 ```
 
+Maintenant que vous avez écrit plusieurs lignes, il est probable que le code ne soit pas formatté selon les standards Go. `go fmt` va vous aider ici.
+
+```
+$ go fmt
+helloworld.go
+```
+
+`go fmt` affiche la liste des fichiers reformattés, ou rien si aucun fichier n'a été modifié.
+
+En général, les IDE s'intégrent facilement avec `go fmt`. Le respect des conventions de formattage est très répandu dans la communauté Go.
+
 ### Quelques explications
 
 Le package `fmt` fournit des fonctions d'intéraction avec la console. C'est un peu l'équivalent de `java.lang.System`, mais il faut l'importer explicitement, alors que `java.lang` est importé implicitement en Java.
