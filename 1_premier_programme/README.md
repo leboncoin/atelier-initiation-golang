@@ -163,7 +163,15 @@ Les fichiers contenant les tests *doivent* avoir un nom qui termine par `_test.g
 
 Il existe donc des packages open-source pour écrire des assertions, mocks, etc. Le plus populaire semble être [testify](https://github.com/stretchr/testify) que nous utilisons beaucoup chez leboncoin.
 
-N'hésitez pas à réécrire le test en utilisant `testify/assert`. Dans ce cas, pensez à récupérer au préalable le package avec la commande `go get github.com/stretchr/testify`.
+### Exercice bonus : Les tests avec Testify
+
+Réécrivez le test en utilisant `testify/assert`.
+
+Au préalable, récupérez le package avec la commande
+
+```
+go get github.com/stretchr/testify`.
+```
 
 Le test ressemblera alors à ceci :
 
