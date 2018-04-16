@@ -5,15 +5,15 @@ Dans un répertoire `$GOPATH/src/service`, créez un fichier `service.go`.
 
 Pour écrire ce microservice, vous aurez besoin du package `net/http` de la bibliothèque standard du langage (cf. https://golang.org/pkg/net/http/).
 
-Ce package met a disposition deux fonctions importantes, `HandleFunc` et `ListenAndServe`.
+Ce package met à disposition deux fonctions importantes, `HandleFunc` et `ListenAndServe`.
 
 #### HandleFunc
 
-```HandleFunc(pattern string, handler func(ResponseWriter, *Request))```
+```HandleFunc(pattern string, handler func(http.ResponseWriter, *http.Request))```
 
 Cette fonction enregistre le `handler` passé en paramètre sur un pattern de path donné.
 
-Le `handler` est un pointeur sur une fonction ayant la signature suivante : `func(ResponseWriter, *Request)`.
+Le `handler` est un pointeur sur une fonction ayant la signature suivante : `func(http.ResponseWriter, *http.Request)`.
 
 Dans cette fonction, il y a deux paramètres :
 - Un `ResponseWriter` qui permet de construire une réponse HTTP ; il contient une fonction pour écrire un tableau de bytes (pour convertir une `string` en tableau de bytes, utilisez `[]byte(myString)`)
@@ -21,7 +21,7 @@ Dans cette fonction, il y a deux paramètres :
 
 #### ListenAndServe
 
-```ListenAndServe(addr string, handler Handler)```
+```ListenAndServe(addr string, handler http.Handler)```
 
 Cette fonction démarre un serveur HTTP qui écoute sur une interface et un port passés en paramètre. Le paramètre `addr` sera de la forme `:8080`.
 
