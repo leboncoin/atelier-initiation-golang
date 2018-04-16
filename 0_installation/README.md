@@ -16,3 +16,15 @@ Le répertoire racine de vos projets devrait être `$HOME/go`, chemin par défau
 ```
 $ export GOPATH=$HOME/monchemin/go
 ```
+
+## Quel IDE ?
+
+Pour cet atelier, n"importe quel éditeur texte fera très bien l'affaire.
+
+Au boncoin, nous aimons bien IntelliJ (version payante), avec son plugin Go (Golang est une version d'IntelliJ qui intégre directement le plugin). On y retrouve certaines fonctionnalités de la version Java d'IntelliJ, comme le refactoring, mais il y a encore beaucoup de choses à améliorer. C'est probablement l'IDE le plus avancé en ce moment.
+
+Parmi les outils gratuits, Visual Studio Code, avec son plugin Go est vraiment de bonne qualité.
+
+Si vous possédez déjà Sublime Text, vous pourrez également utiliser son plugin Go, néanmoins relativement limité.
+
+La plupart des éditeurs populaires ont leur propre intégration avec Go.
