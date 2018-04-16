@@ -50,6 +50,12 @@ $ ./hello
 Hello, World
 ```
 
+Il est aussi possible de demander à Go d'exécuter le code sans créer de binaire :
+```
+$ go run helloworld.go
+Hello, World
+```
+
 Maintenant que vous avez écrit plusieurs lignes, il est probable que le code ne soit pas formatté selon les standards Go. `go fmt` va vous aider ici.
 
 ```
