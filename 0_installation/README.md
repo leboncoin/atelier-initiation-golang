@@ -11,8 +11,8 @@ $ go version
 go version go1.9 linux/amd64
 ```
 
-Le répertoire racine de vos projets devrait être `$HOME/go`. Dans le cas contraire, positionnez une variable `GOPATH` (recommandé).
+Le répertoire racine de vos projets devrait être `$HOME/go`, chemin par défaut pour les projets Go. Si vous souhaitez un chemin particulier, positionnez une variable `GOPATH` (recommandé).
 
 ```
-$ export GOPATH=$HOME/devoxx/go
+$ export GOPATH=$HOME/monchemin/go
 ```
