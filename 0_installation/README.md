@@ -1,6 +1,6 @@
 # Installer Go
 
-Voir les instructions pour la dernière version : https://golang.org/doc/install
+Voir les instructions pour la dernière version sur https://golang.org/doc/install (sous macOS, `brew install go` est la solution la plus simple).
 
 Si vous possédez déjà Go sur votre machine, inutile de le mettre à jour pour cet atelier.
 
