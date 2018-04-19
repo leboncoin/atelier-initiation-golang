@@ -176,7 +176,7 @@ Réécrivez le test en utilisant `testify/assert`.
 Au préalable, récupérez le package avec la commande
 
 ```
-go get github.com/stretchr/testify`.
+go get github.com/stretchr/testify
 ```
 
 Le test ressemblera alors à ceci :
